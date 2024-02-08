@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+  namespace: comtest
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: consumer
+        image: schmivin/comtest-consumer:0.1.0
+        env:
+        - name: SERVER_ADDRESS
+          value: "http://producer:8080"

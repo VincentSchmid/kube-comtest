@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  producer:
+    container_name: comtest-producer
+    image: schmivin/comtest-producer:0.1.0
+    ports:
+      - "8080:8080"
+
+  consumer:
+    container_name: comtest-consumer
+    image: schmivin/comtest-consumer:0.1.0
+    environment:
+      - SERVER_ADDRESS=http://producer:8080
+    depends_on:
+      - producer
